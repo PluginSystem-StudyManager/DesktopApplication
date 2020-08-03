@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import GuiElements.ButtonIcon?>
+<AnchorPane fx:id="anchorPaneWebview" prefHeight="800.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="WebView.Gui.ControllerWebView">
+    <children>
+        <ButtonIcon AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0"
+                    icon="/Icons/icons8-edit-48.png" size="36" fx:id="btnToggleEdit"/>
+    </children>
+</AnchorPane>

@@ -1,0 +1,17 @@
+.tabInfoContainer {
+    -fx-border-width: 2px;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 6px;
+    -fx-background-color: -color-elevation-20;
+    -fx-background-radius: 6px;
+    -fx-padding: 10;
+}
+
+.lblName {
+    -fx-alignment: center;
+    -fx-text-fill: -color-font-default;
+}
+
+.lblShortDescription {
+    -fx-text-fill:  -color-font-weaken;
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<fx:root
+         stylesheets="@tabInfo.css"
+         type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/10.0.2-internal"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane prefWidth="200" prefHeight="200" styleClass="tabInfoContainer">
+        <VBox AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Label fx:id="lblName" styleClass="lblName, header-2"/>
+            <Label wrapText="true" fx:id="lblShortDescription" styleClass="lblShortDescription"/>
+        </VBox>
+        <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button text="%add" onMouseClicked="#installTab" styleClass="button-default" prefWidth="100">
+                <graphic>
+                    <ImageView fitHeight="18" fitWidth="18">
+                        <Image url="/Icons/icons8-plus-48.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </AnchorPane>
+
+</fx:root>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import GuiElements.AutoCompleteTextField?>
+<AnchorPane id="anchorPaneFrameless" fx:id="anchorPaneLesson" prefHeight="538.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Button fx:id="buttonSave" layoutX="60.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#AddSubjectToTimetable" prefHeight="27.0" prefWidth="109.0" text="erstellen" />
+        <Button fx:id="buttonClose" layoutX="183.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#closeSubjectWindow" prefHeight="27.0" prefWidth="96.0" text="Abrechen" />
+        <Label layoutX="60.0" layoutY="47.0" style="-fx-font-weight: bold;" text="Unterrichstunde erstellen" />
+        <Label layoutX="61.0" layoutY="376.0" text="Gebäude- / Raumbezeichnung" />
+        <AutoCompleteTextField fx:id="textFieldCourseLocation" layoutX="61.0" layoutY="401.0" prefHeight="25.0" prefWidth="246.0" />
+        <TableView fx:id="tableViewSubjects" layoutX="57.0" layoutY="81.0" prefHeight="229.0" prefWidth="671.0" style="-fx-background-color: #9E9E9E; -fx-background-radius: 8px;" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+            <columns>
+                <TableColumn fx:id="colColor" prefWidth="54.0" text="Farbe" />
+                <TableColumn fx:id="colSubjectName" prefWidth="316.0" text="Vorlesung" />
+                <TableColumn fx:id="colLecturer" prefWidth="290.0" text="Dozent" />
+            </columns>
+        </TableView>
+        <Button fx:id="buttonEditLesson" layoutX="60.0" layoutY="323.0" mnemonicParsing="false" onAction="#loadEditLessonWindow" prefHeight="27.0" prefWidth="162.0" text="Fach bearbeiten / erstellen" />
+        <HBox layoutX="61.0" layoutY="447.0" spacing="20.0">
+            <children>
+                <CheckBox fx:id="checkBoxDoubleHour" mnemonicParsing="false" text="Doppelstunde" />
+                <CheckBox fx:id="checkBoxTutorial" mnemonicParsing="false" text="Tutorium" />
+                <CheckBox fx:id="checkBoxInterval" mnemonicParsing="false" text="2 wöchiges Intervall" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

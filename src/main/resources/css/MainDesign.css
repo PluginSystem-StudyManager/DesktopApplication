@@ -1,0 +1,437 @@
+
+/* #################################################### DEBUG ######################################################## */
+.debug {
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+}
+
+.debug-2 {
+    -fx-border-color: indigo;
+    -fx-border-width: 2px;
+    -fx-background-color: white;
+}
+
+.debug-bold {
+    -fx-border-color: blue;
+    -fx-border-width: 8px;
+}
+.debug-bold-2 {
+    -fx-border-color: orange;
+    -fx-border-width: 8px;
+}
+
+/* #################################################### General ######################################################## */
+.btn-icon-only {
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-border-width: 3;
+    -fx-border-color: -color-button-default;
+    -fx-padding: 10;
+}
+
+.btn-icon-only:hover {
+    -fx-border-color: -color-button-accent;
+    -fx-cursor: hand;
+}
+
+/* #################################################### Tabs ######################################################## */
+
+/** menu */
+.tab-menu {
+    -fx-background-color: -color-elevation-10;
+    -fx-border-width: 0 3 0 0;
+    -fx-border-color: -color-border-accent;
+}
+
+.tab-label {
+    -fx-border-color: -color-border-weaken, -color-border-default;
+    -fx-background-color: derive(-color-elevation-20, -20%);
+    -fx-border-width: 0 0 3 0, 0 0 0 4; /* Bottom as divider. Left as current tab marker */
+    -fx-border-insets: 0 0 0 0, 0 0 3 0; /* Border same height as Icon */
+    -fx-padding: 0 10 0 0;
+    -fx-font-size: 1.3em;
+}
+
+.tab-label-text {
+    -fx-text-fill: -color-font-default;
+}
+
+.tab-label:hover {
+    -fx-background-color: derive(-color-elevation-20, -10%);
+    -fx-cursor: hand;
+}
+
+.tab-label:selected {
+    -fx-background-color: derive(-color-elevation-20, 30%);
+    -fx-border-color: -color-border-weaken, derive(-color-border-weaken, 80%);
+}
+
+.btn-menu {
+    -fx-border-width: 0 0 0 4; /* Same as tab-label */
+    -fx-border-color: transparent;
+}
+
+.btn-menu:hover {
+    -fx-background-color: derive(-color-elevation-10, 5%);
+    -fx-cursor: hand;
+}
+
+/* Settings */
+.btn-settings {
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -color-font-default;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+
+.btn-settings:hover {
+    -fx-cursor: hand;
+}
+
+.btn-settings:hover .image-view {
+    -fx-rotate: 10;
+}
+
+.settings-pane-bar {
+    -fx-background-color: derive(-color-elevation-10, -20%);
+    -fx-border-width: 0;
+    -fx-border-color: red;
+}
+
+.tab-settings-pane {
+    -fx-background-color: -color-elevation-10;
+    -fx-border-width: 0 0 0 3;
+    -fx-border-color: -color-border-accent;
+    -fx-effect: dropshadow(gaussian , rgba(0, 0, 0, 0.4), 10, 0.2, -5, 0); /*Find way to display left dropshadow*/
+    -fx-padding: 20 10 20 10;
+}
+
+.settings-container {
+}
+
+.btn-control {
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -color-font-default;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+    -fx-border-width: 0 2 0 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 1.0em;
+    -fx-border-color: -color-border-default;
+}
+
+.btn-control:hover {
+    -fx-cursor: hand;
+    -fx-text-fill: derive(-color-font-default, 10%);
+    -fx-border-color: -color-border-accent;
+    -fx-background-color: derive(-color-elevation-10, 0%);
+}
+
+.btn-control:selected {
+    -fx-background-color: derive(-color-elevation-10, 20%);
+    -fx-border-color: -color-border-accent;
+
+}
+
+
+
+
+
+/* ############################################# Context Menu ####################################################### */
+
+.menu:hover, .menu:showing {
+    -fx-background-color: -color-elevation-20;
+}
+
+.context-menu {
+    -fx-background-color: -color-elevation-10;
+    -fx-border-color: -color-border-default;
+    -fx-padding: 0;
+    -fx-effect: -dropshadow-default;
+    /*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
+}
+
+.menu-item {
+    -fx-border-width: 0 0 0.5 0;
+    -fx-border-color: -color-border-weaken;
+}
+
+.menu-item:focused {
+    -fx-background-color: -color-elevation-30;
+}
+
+.menu-item:focused .label {
+    -fx-background-color: -color-elevation-30;
+}
+
+.menu-item .label {
+    -fx-background-color: -color-elevation-10;
+    -fx-padding: 2 2 2 2;
+    -fx-font-weight: bold;
+}
+
+
+#anchorPaneFrameless {
+    -fx-background-color: -color-background-default;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 2px;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+
+}
+
+#paneSubjectColor {
+    -fx-background-radius: 6px;
+
+}
+
+/* ################################################ Check Box ####################################################### */
+
+.check-box .box {
+    -fx-background-color: -color-input-background;
+    -fx-text-fill: -color-font-default;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-insets: 0;
+    -fx-padding: 2;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -color-font-accent;
+}
+
+.check-box:selected .box {
+    -fx-background-color: derive(-color-input-background, 20%);
+}
+
+.check-box {
+    -fx-text-fill: -color-font-default;
+}
+
+/* ################################################ TableView ####################################################### */
+
+/* TODO: TableView Background radius. Same as tableView header */
+
+
+.table-view .column-header-background {
+    -fx-background-color: -color-elevation-20;
+    -fx-border-width: 1px;
+    -fx-border-color: -color-border-default;
+}
+
+.table-view .column-header-background .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-font-default;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: -color-font-default;
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: -fx-table-cell-border-color, derive(-color-elevation-10, 90%);
+}
+
+.table-row-cell:even {
+    -fx-background-color: -fx-table-cell-border-color, derive(-color-elevation-10, 80%);
+}
+
+.table-row-cell:selected {
+    -fx-background-color: orange; /* TODO*/
+}
+
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view > .virtual-flow > .scroll-bar > .increment-button,
+.table-view > .virtual-flow > .scroll-bar > .decrement-button {
+    -fx-opacity: 0;
+}
+
+
+/* ############################################# GUI Elements ####################################################### */
+
+
+.separator
+{
+    -fx-background-color: radial-gradient(focus-distance 0% , center 50% 50% , radius 60% , #9BB6CC, white);
+    -fx-background-radius: 2;
+    -fx-padding:1;
+}
+
+.separator .line
+{
+    -fx-border-style: solid;
+    -fx-border-width: 0px;
+}
+
+
+.button {
+    -fx-background-color: -color-button-default;
+    -fx-text-fill: -color-font-default;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1px;
+    -fx-background-insets: 0;
+}
+
+.button:hover {
+    -fx-background-color: -color-button-hover;
+    -fx-border-color: -color-border-accent;
+    -fx-cursor: hand;
+}
+
+
+.color-picker {
+    -fx-font-size: 1.0em;
+    -fx-text-fill: -color-font-default;
+    -fx-background-color: -color-input-background;
+    -fx-background-radius: 8;
+}
+
+.color-picker:hover {
+    -fx-cursor: hand;
+}
+
+.color-picker .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-font-default;
+    -fx-background-color: -color-input-background;
+}
+
+
+.label {
+    -fx-font-weight: normal;
+    -fx-font-size: 1.0em;
+    -fx-text-fill: -color-font-default;
+    -fx-background-color: transparent;
+    -fx-padding: 5 10 5 10;
+    /*-fx-background-radius: 12px;*/
+    -fx-alignment: center;
+}
+
+#labelDays { // TODO: to class instead of id
+    -fx-background-color: -color-elevation-10;
+    -fx-padding: 5 15 5 15;
+    -fx-text-fill: -color-font-default;
+    -fx-font-size: 1.4em;
+}
+
+#labelTimes {
+    -fx-background-color: -color-elevation-10;
+    -fx-padding: 5 15 5 15;
+    -fx-text-fill: -color-font-default;
+    -fx-font-size: 1.4em;
+}
+
+.text-input {
+    -fx-font-size: 1.0em;
+    -fx-text-fill: -color-font-default;
+    -fx-background-color: -color-input-background;
+    -fx-font-weight: bold;
+    -fx-background-radius: 2;
+    -fx-highlight-fill: derive(-color-input-background, -60%);
+    -fx-border-width: 1;
+    -fx-border-color: derive(-color-border-default, -40%);
+}
+
+.text-input:focused {
+    -fx-background-color: derive(-color-input-background, 10%);
+    -fx-border-color: -color-border-default;
+}
+
+
+
+.combo-box {
+    -fx-text-fill: -color-font-default;
+    -fx-background-color: -color-input-background;
+    -fx-font-weight: bold;
+}
+
+.combo-box:hover {
+    -fx-cursor: hand;
+}
+
+.combo-box .list-cell{
+    -fx-text-fill: -color-font-default;
+    -fx-background-color: -color-input-background;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #3D00E0;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #3D00E0;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #3D00E0;
+}
+
+
+#SettingsEmptyLesson {
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 5, 0, 0, 3);
+}
+
+#SettingsLesson {
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 5, 0, 0, 3);
+    -fx-background-radius: 12px;
+}
+
+#paneSubjectColor {
+
+    -fx-background-radius: 25px;
+    -fx-max-width: 15px;
+    -fx-max-height: 15px;
+}
+
+#MainInformationTimeTable{
+
+    -fx-background-radius: 12px;
+    -fx-background-color: #757575;
+}
+
+/* ########################################### WEB View Elements ##################################################### */
+
+
+#BoxWebView {
+
+    -fx-background-radius: 12px;
+    -fx-background-color: #757575;
+}
+
+#BoxWebViewLight {
+
+    -fx-background-radius: 12px;
+    -fx-background-color: darkgrey;
+}
+
+.split-pane-divider {
+    -fx-background-color: -color-background-default;
+}
+
+/* ########################################### General settings ##################################################### */
+
+
+#generalSettings .label {
+    -fx-font-size: 1.2em;
+}

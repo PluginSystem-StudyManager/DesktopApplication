@@ -1,0 +1,32 @@
+* {
+    // Font
+    -color-font-default: #fff;
+    -color-font-weaken: #dedede;
+    -color-font-accent: #FFD194;
+
+    -color-font-red: red;
+    -color-font-green: green;
+
+    // Widgets
+    -color-elevation-10: #72154a;
+    -color-elevation-20: #844c5b;
+    -color-elevation-30: #976a72;
+    -color-button-default: #5f0a3e;
+    -color-button-hover: #8e225c;
+    -color-button-accent: #ea0090;
+    -color-button-weaken: #662d4c;
+    -color-input-background: #381016;
+
+    // Backgrounds
+    -color-background-default: #52183b;
+    -color-background-alternative: #440e31;
+
+    // Borders
+    -color-border-default: #9c4e76;
+    -color-border-weaken: #a07885;
+    -color-border-accent: #980748;
+
+    // DropShadow
+    -dropshadow-default: dropshadow(gaussian, rgba(10, 10, 10, 0.4), 0, 10, 2, 2);
+    -dropshadow-accent: dropshadow(gaussian, rgba(10, 10, 10, 0.6), 0, 10, 4, 4);
+}

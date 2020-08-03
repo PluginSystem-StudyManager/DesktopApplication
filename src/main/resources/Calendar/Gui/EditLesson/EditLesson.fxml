@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="anchorPaneFrameless" fx:id="anchorPaneEditLesson" prefHeight="538.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Button fx:id="buttonSaveAndBack" layoutX="34.0" layoutY="480.0" mnemonicParsing="false" onAction="#loadEditLessonWindow" prefHeight="27.0" prefWidth="112.0" text="zurück" />
+        <Label layoutX="490.0" layoutY="45.0" style="-fx-font-weight: bold;" text="neues Fach hinzufügen" />
+          <Label layoutX="494.0" layoutY="114.0" text="Dozent / Lehrkraft" />
+      <TextField fx:id="textFieldProfessor" layoutX="494.0" layoutY="141.0" />
+          <Label layoutX="494.0" layoutY="176.0" text="Unterichtsfach" />
+      <TextField fx:id="textFieldSubject" layoutX="494.0" layoutY="203.0" />
+          <Label layoutX="494.0" layoutY="238.0" text="Hintergrundfarbe" />
+          <ColorPicker fx:id="colorPickerSubjectColor" layoutX="494.0" layoutY="265.0" />
+        <Button fx:id="buttonSave_Create" layoutX="490.0" layoutY="374.0" mnemonicParsing="false" onAction="#addNewSubject" prefHeight="27.0" prefWidth="112.0" text="erstellen" />
+        <Button fx:id="buttonEdit" layoutX="34.0" layoutY="414.0" mnemonicParsing="false" onAction="#editSubject" prefHeight="27.0" prefWidth="112.0" text="bearbeiten" />
+        <Button fx:id="buttonDelete" layoutX="166.0" layoutY="414.0" mnemonicParsing="false" onAction="#deleteSubject" prefHeight="27.0" prefWidth="112.0" text="löschen" />
+        <TableView fx:id="tableViewSubjects" layoutX="34.0" layoutY="45.0" prefHeight="363.0" prefWidth="406.0" style="-fx-background-color: #9E9E9E; -fx-background-radius: 8px;">
+            <columns>
+                <TableColumn fx:id="colColor" prefWidth="75.0" text="Farbe" />
+                <TableColumn fx:id="colSubjectName" prefWidth="190.0" text="Vorlesung" />
+                <TableColumn fx:id="colLecturer" prefWidth="139.0" text="Dozent" />
+            </columns>
+        </TableView>
+      <Button layoutX="166.0" layoutY="481.0" mnemonicParsing="false" onAction="#closeSubjectWindow" prefHeight="25.0" prefWidth="112.0" text="Abbrechen" />
+    </children>
+</AnchorPane>

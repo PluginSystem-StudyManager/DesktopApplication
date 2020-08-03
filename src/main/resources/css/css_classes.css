@@ -1,0 +1,46 @@
+.background-default {
+    -fx-background-color: -color-background-default;
+}
+
+.background-alternative {
+    -fx-background-color: -color-background-alternative;
+}
+
+.elevation-10 {
+    -fx-background-color: -color-elevation-10;
+}
+.elevation-20 {
+    -fx-background-color: -color-elevation-20;
+}
+.elevation-30 {
+    -fx-background-color: -color-elevation-30;
+}
+
+.button-default {
+    -fx-background-color: -color-button-default;
+    -fx-text-fill: -color-font-default;
+}
+.button-weaken {
+    -fx-background-color: -color-button-weaken;
+}
+.button-accent {
+    -fx-background-color: -color-button-accent;
+}
+
+.header-1 {
+    -fx-font-size: 2em;
+    -fx-font-weight: bold;
+}
+
+.header-2 {
+    -fx-font-size: 1.7em;
+    -fx-font-weight: bold;
+}
+
+.header-3 {
+    -fx-font-size: 1.2em;
+}
+
+.header-4 {
+    -fx-font-size: 1.1em;
+}

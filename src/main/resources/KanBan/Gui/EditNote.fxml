@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="427.0" prefWidth="516.0" xmlns="http://javafx.com/javafx/8.0.171"
+            fx:controller="KanBan.Gui.EditNoteController">
+   <children>
+      <TextField fx:id="textFieldTitle" alignment="CENTER" layoutX="165.0" layoutY="14.0" promptText="Titel">
+         <font>
+            <Font name="System Bold" size="14.0"/>
+         </font>
+      </TextField>
+      <VBox alignment="TOP_CENTER" layoutX="81.0" layoutY="122.0" prefHeight="206.0" prefWidth="355.0">
+         <children>
+            <Label alignment="CENTER" text="Beschreibung">
+               <font>
+                  <Font name="System Bold" size="20.0"/>
+               </font>
+            </Label>
+            <TextArea fx:id="textAreaDescription" prefHeight="176.0" prefWidth="378.0" wrapText="true"/>
+         </children>
+      </VBox>
+      <Button fx:id="buttonFinish" layoutX="398.0" layoutY="360.0" mnemonicParsing="false" onAction="#createNote"
+              prefWidth="70.0" text="Fertig"/>
+      <Button fx:id="buttonAdd" layoutX="89.0" layoutY="360.0" mnemonicParsing="false" onAction="#addFile"
+              prefWidth="70.0" text="Add"/>
+      <ScrollPane layoutX="13.0" layoutY="59.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="490.0"
+                  vbarPolicy="NEVER">
+         <content>
+            <HBox fx:id="boxSteps" prefHeight="38.0" prefWidth="488.0"/>
+         </content>
+      </ScrollPane>
+      <Button fx:id="buttonDelete" layoutX="13.0" layoutY="360.0" mnemonicParsing="false" onAction="#delete"
+              prefWidth="70.0" text="Delete"/>
+   </children>
+</AnchorPane>

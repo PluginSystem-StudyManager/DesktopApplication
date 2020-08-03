@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import GuiElements.TabSettings?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="SettingsPane" fx:id="anchorPaneSettings" prefHeight="700.0"
+            prefWidth="331.0"
+            fx:controller="Calendar.Gui.Settings.ControllerCalendarSettings">
+    <children>
+        <Button layoutX="14.0" layoutY="659.0" mnemonicParsing="false" onMouseClicked="#saveButtons"
+                prefHeight="27.0"
+                prefWidth="99.0" text="Speichern"/>
+        <Button layoutX="124.0" layoutY="660.0" mnemonicParsing="false" onMouseClicked="#closeWindow"
+                prefHeight="27.0"
+                prefWidth="99.0" text="Abrechen"/>
+        <Label layoutX="125.0" layoutY="23.0" style="-fx-font-weight: bold; -fx-font-size: 1.2em;"
+               text="Einstellungen"
+               AnchorPane.leftAnchor="106.0" AnchorPane.rightAnchor="106.0" AnchorPane.topAnchor="25.0"/>
+        <VBox alignment="CENTER" layoutX="56.0" layoutY="108.0" prefHeight="185.0" prefWidth="223.0" spacing="10.0"
+              AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="56.0">
+            <children>
+                <Label prefHeight="27.0" prefWidth="205.0" text="Studiumsbezeichnung / Semester"/>
+                <HBox alignment="CENTER" prefHeight="23.0" prefWidth="235.0" spacing="10.0">
+                    <children>
+                        <TextField fx:id="textFieldSemesterName" prefHeight="25.0" prefWidth="136.0"
+                                   promptText="Informatik"/>
+                        <ComboBox fx:id="comboBoxCurrentSemester" prefHeight="25.0" prefWidth="72.0"/>
+                    </children>
+                </HBox>
+                <Label prefHeight="27.0" prefWidth="205.0" text="Anzahl Wochentage / Vorlesungen">
+                    <VBox.margin>
+                        <Insets/>
+                    </VBox.margin>
+                </Label>
+                <HBox spacing="10.0">
+                    <children>
+                        <ComboBox fx:id="comboBoxNumberOfDays" prefHeight="25.0" prefWidth="129.0"/>
+                        <ComboBox fx:id="comboBoNumberOfLessons" prefHeight="25.0" prefWidth="129.0"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <Separator layoutX="34.0" layoutY="300.0" prefHeight="2.0" prefWidth="285.0" AnchorPane.leftAnchor="34.0"
+                   AnchorPane.rightAnchor="34.0"/>
+        <Label layoutX="51.0" layoutY="329.0" prefHeight="27.0" prefWidth="229.0" style="-fx-font-weight: bold;"
+               text="Unterichtspausen in Minuten"/>
+        <VBox alignment="CENTER" layoutX="52.0" layoutY="350.0" prefHeight="272.0" prefWidth="231.0" spacing="10.0"
+              AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="52.0">
+            <children>
+                <Label prefHeight="27.0" prefWidth="205.0" text="Kleine Pause / Mittagspause"/>
+                <HBox spacing="10.0">
+                    <children>
+                        <ComboBox fx:id="comboBoxShortBreakMin" prefWidth="129.0"/>
+                        <ComboBox fx:id="comboBoxLunchBreakMin" prefWidth="129.0"/>
+                    </children>
+                </HBox>
+                <Label prefHeight="27.0" prefWidth="205.0" text="Dauer einer Unterrichstunde"/>
+                <ComboBox fx:id="comboBoxDurationOfLectures" prefWidth="150.0"/>
+                <Label prefHeight="27.0" prefWidth="205.0" text="Mittagspause nach Vorlesungen"/>
+                <ComboBox fx:id="comboBoxLunchBreakAfterNumberOfLessons" prefHeight="25.0" prefWidth="158.0"/>
+            </children>
+        </VBox>
+        <Label fx:id="labelInformation" layoutX="51.0" layoutY="81.0" prefHeight="27.0" prefWidth="229.0"
+               style="-fx-font-weight: bold;" text="Angaben zum Studium"/>
+    </children>
+</AnchorPane>

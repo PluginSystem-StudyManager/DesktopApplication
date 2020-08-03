@@ -1,0 +1,27 @@
+<?import GuiElements.TabWindow?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Button?>
+<?import GuiElements.TabCustom?>
+<?import GuiElements.TabSettings?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import themes.ThemePickerWidget?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import tabs.page_add_tab.AddTabPage?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="entryPoint.mainPage.ControllerMainPage">
+    <TabWindow tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+               closeMenuAfterSelect="true" contentResizing="OVERLAP" fx:id="tabWindow">
+        <TabCustom text="Plugins hinzufügen" closable="false" iconPath="/Icons/icons8-plus-48.png">
+            <fx:include source="/tabs/page_add_tab/add_tab.fxml"/>
+        </TabCustom>
+
+        <settings>
+            <fx:include source="/entryPoint/general_settings/general_settings.fxml"/>
+        </settings>
+    </TabWindow>
+</AnchorPane>

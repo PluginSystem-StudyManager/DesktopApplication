@@ -1,0 +1,38 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
+
+application {
+    // Define the main class for the application.
+    mainClassName = 'Start'
+}
+
+javafx {
+    modules = ["javafx.controls", "javafx.fxml", "javafx.web"]
+}
+
+run {
+    jvmArgs = ['--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED']
+}
+
+task unzip(type: Copy, dependsOn: distZip) {
+
+    def zipPath = "${buildDir}/distributions/StudyTool.zip"
+    def zipFile = file(zipPath)
+    def outputDir = file("${buildDir}/distributions")
+
+    from zipTree(zipFile)
+    into outputDir
+
+}
+
+task makeInstaller(type:Exec, dependsOn: unzip) {
+    /*Java 14+ needed*/
+    workingDir "build/distributions/StudyTool"
+    commandLine "cmd", "/c", "jpackage -i lib -n StudyTool --main-class Start --main-jar StudyTool.jar --win-dir-chooser --win-shortcut"
+}
