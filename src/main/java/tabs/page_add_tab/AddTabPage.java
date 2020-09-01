@@ -2,21 +2,23 @@ package tabs.page_add_tab;
 
 
 import GuiElements.ButtonIcon;
-import GuiElements.CustomWidget;
 import entryPoint.Main;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import tabs.*;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import tabs.InstalledTabs;
+import tabs.SingleChildLayout;
+import tabs.TabData;
+import tabs.Tabs;
 
 import java.net.URL;
 import java.util.List;
@@ -34,36 +36,35 @@ public class AddTabPage extends StackPane implements Initializable {
     @FXML FlowPane containerStandardPlugins;
     @FXML FlowPane containerUserPlugins;
     @FXML ScrollPane scrollPaneStandardPlugins;
-    @FXML ScrollPane scrollPaneUserPlugins;
-    @FXML Pane containerTabInfo;
-    @FXML ProgressIndicator progressIndicator;
+    @FXML
+    ScrollPane scrollPaneUserPlugins;
+    @FXML
+    SingleChildLayout containerTabInfo;
+    @FXML
+    ProgressIndicator progressIndicator;
     @FXML VBox containerError;
-
-    private SingleChildLayout tabInfoPane;
 
     public AddTabPage() {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabInfoPane = new SingleChildLayout();
-        containerTabInfo.getChildren().add(tabInfoPane);
         loadAvailableTabs();
 
         // Standard tabs
         TabData tabDataWebsite = new TabData("Webseite", new String[]{},
                 "Ein Fenster in das Webseiten geladen werden",
                 "Ein Fenster in das Webseiten geladen werden. Diese können beliebig angeordnet werden.");
-        TabInfo tabInfoWebsite = new TabInfoBuiltin(tabDataWebsite, tabInfoPane,
+        TabInfo tabInfoWebsite = new TabInfoBuiltin(tabDataWebsite, containerTabInfo,
                 "/WebView/Gui/WebView.fxml", "/WebView/Gui/settings.fxml",
                 "/Icons/icons8-web-64.png", "/images/website-plugin-preview.png");
         containerStandardPlugins.getChildren().add(tabInfoWebsite);
 
-        TabData tabDataCalendar= new TabData("Vorlesungsplan", new String[]{},
+        TabData tabDataCalendar = new TabData("Vorlesungsplan", new String[]{},
                 "Dein komplett individualisierbarer Vorlesungsplan.",
                 "Dein komplett individualisierbarer Vorlesungsplan. Schnelles " +
                         "erstellen, bearbeiten und anzeigen des Vorlesungsplans mit allen nötigen Informationen.");
-        TabInfo tabInfoCalendar = new TabInfoBuiltin(tabDataCalendar, tabInfoPane,
+        TabInfo tabInfoCalendar = new TabInfoBuiltin(tabDataCalendar, containerTabInfo,
                 "/Calendar/Gui/Calender.fxml", "/Calendar/Gui/Settings/CalendarSettings.fxml",
                 "/Icons/icons8-zeitplan-64.png", "/images/calendar-plugin-preview.png");
         containerStandardPlugins.getChildren().add(tabInfoCalendar);
@@ -112,7 +113,7 @@ public class AddTabPage extends StackPane implements Initializable {
                 clearPane(containerUserPlugins);
                 for(TabData tab : availableTabs) {
                     if(!InstalledTabs.get().isInstalled(tab.name)) {
-                        containerUserPlugins.getChildren().add(new TabInfoUser(tab, tabInfoPane, this::loadAvailableTabs));
+                        containerUserPlugins.getChildren().add(new TabInfoUser(tab, containerTabInfo, this::loadAvailableTabs));
                     }
                 }
             }

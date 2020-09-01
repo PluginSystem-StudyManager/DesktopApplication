@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
-<?import tabs.page_add_tab.TabInfo?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import tabs.SingleChildLayout?>
 <AnchorPane styleClass="background-default"
             stylesheets="/tabs/page_add_tab/add_tab_page.css"
             xmlns="http://javafx.com/javafx/10.0.2-internal"
@@ -43,7 +34,7 @@
                 </StackPane>
             </VBox>
         </SplitPane>
-        <VBox fx:id="containerTabInfo" styleClass="container-full-info"/>
+        <SingleChildLayout fx:id="containerTabInfo" styleClass="container-full-info"/>
     </SplitPane>
 
 </AnchorPane>
