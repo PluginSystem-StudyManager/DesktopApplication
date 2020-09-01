@@ -7,6 +7,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import tabs.apiClasses.ListPluginsResult;
+import tabs.apiClasses.PluginData;
 
 
 import java.io.File;
@@ -78,7 +80,7 @@ public class Tabs {
     private List<TabWrapper> _loadInstalledTabs() {
         List<TabWrapper> tabsList = new ArrayList<>();
         List<String> installedTabs = Config.data().getTabs();
-        for(String tabName : installedTabs) {
+        for (String tabName : installedTabs) {
             // Filename must be {tabName}.jar
             File jarFile = new File(tabsFolder, tabName + ".jar");
             TabWrapper tab = loadJar(jarFile, TabsDataStore.data().get(tabName));
@@ -139,19 +141,25 @@ public class Tabs {
         List<TabData> availableTabs = new ArrayList<>();
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://127.0.0.1:8080/plugins/list/"))
+                .uri(URI.create("http://127.0.0.1:8080/plugins/list"))
                 .header("Content-Type", "application/json")
                 .build();
         try {
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenApply(HttpResponse::body)
                     .thenAccept(s -> {
-                        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
-                        AllPluginsData allPluginsData = gson.fromJson(s, AllPluginsData.class);
-                        availableTabs.addAll(allPluginsData.plugins.values());
+                        Gson gson = new GsonBuilder().create();
+                        ListPluginsResult res = gson.fromJson(s, ListPluginsResult.class);
+                        for (PluginData plugin : res.getData()) {
+                            // TODO: Adjust classes. (No empty/dummy values)
+                            // Either fully remove the `TabData` class and use only `PluginData` from json schema or
+                            // Adjust class attributes
+                            availableTabs.add(new TabData(plugin.getName(), new String[]{},
+                                    plugin.getShortDescription(), ""));
+                        }
                     })
                     .join();
-        }catch (CompletionException e) {
+        } catch (CompletionException e) {
             throw new ConnectException(e.getMessage());
         }
         return availableTabs;
@@ -184,12 +192,4 @@ public class Tabs {
         public LoadInfoData() {
         }
     }
-
-    static class AllPluginsData {
-        HashMap<String, TabData> plugins;
-
-        public AllPluginsData() {
-        }
-    }
-
 }
