@@ -4,9 +4,12 @@ package tabs.page_add_tab;
 import GuiElements.ButtonIcon;
 import GuiElements.CustomWidget;
 import entryPoint.Main;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
@@ -14,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import tabs.*;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,8 +31,10 @@ public class AddTabPage extends StackPane implements Initializable {
     @FXML
     private Pane root;
 
-    @FXML GridPane containerStandardPlugins;
-    @FXML GridPane containerUserPlugins;
+    @FXML FlowPane containerStandardPlugins;
+    @FXML FlowPane containerUserPlugins;
+    @FXML ScrollPane scrollPaneStandardPlugins;
+    @FXML ScrollPane scrollPaneUserPlugins;
     @FXML Pane containerTabInfo;
     @FXML ProgressIndicator progressIndicator;
     @FXML VBox containerError;
@@ -51,7 +57,7 @@ public class AddTabPage extends StackPane implements Initializable {
         TabInfo tabInfoWebsite = new TabInfoBuiltin(tabDataWebsite, tabInfoPane,
                 "/WebView/Gui/WebView.fxml", "/WebView/Gui/settings.fxml",
                 "/Icons/icons8-web-64.png", "/images/website-plugin-preview.png");
-        containerStandardPlugins.add(tabInfoWebsite, 0, 0);
+        containerStandardPlugins.getChildren().add(tabInfoWebsite);
 
         TabData tabDataCalendar= new TabData("Vorlesungsplan", new String[]{},
                 "Dein komplett individualisierbarer Vorlesungsplan.",
@@ -60,8 +66,15 @@ public class AddTabPage extends StackPane implements Initializable {
         TabInfo tabInfoCalendar = new TabInfoBuiltin(tabDataCalendar, tabInfoPane,
                 "/Calendar/Gui/Calender.fxml", "/Calendar/Gui/Settings/CalendarSettings.fxml",
                 "/Icons/icons8-zeitplan-64.png", "/images/calendar-plugin-preview.png");
-        containerStandardPlugins.add(tabInfoCalendar, 1, 0);
+        containerStandardPlugins.getChildren().add(tabInfoCalendar);
 
+        // Sizing
+        scrollPaneStandardPlugins.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
+            containerStandardPlugins.prefWrapLengthProperty().setValue(newValue.getWidth());
+        });
+        scrollPaneUserPlugins.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
+            containerUserPlugins.prefWrapLengthProperty().setValue(newValue.getWidth());
+        });
     }
 
     private void loadAvailableTabs() {
@@ -97,12 +110,9 @@ public class AddTabPage extends StackPane implements Initializable {
             } else {
                 // Show all tabs
                 clearPane(containerUserPlugins);
-                int row = 0;
-                int col = 0;
                 for(TabData tab : availableTabs) {
                     if(!InstalledTabs.get().isInstalled(tab.name)) {
-                        containerUserPlugins.add(new TabInfoUser(tab, tabInfoPane, this::loadAvailableTabs), col, row);
-                        col++;
+                        containerUserPlugins.getChildren().add(new TabInfoUser(tab, tabInfoPane, this::loadAvailableTabs));
                     }
                 }
             }

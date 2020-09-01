@@ -31,4 +31,5 @@
 .gridpane-plugins{
     -fx-hgap: 20;
     -fx-vgap: 20;
+    -fx-background-color: -color-elevation-10;
 }

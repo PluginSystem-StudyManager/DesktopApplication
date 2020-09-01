@@ -12,18 +12,22 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.FlowPane?>
 <AnchorPane styleClass="background-default"
             stylesheets="/tabs/page_add_tab/add_tab_page.css"
             xmlns="http://javafx.com/javafx/10.0.2-internal"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="tabs.page_add_tab.AddTabPage" fx:id="root">
-    <SplitPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
-          styleClass="background-default">
+    <SplitPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+               AnchorPane.bottomAnchor="0.0"
+               styleClass="background-default">
         <SplitPane styleClass="plugins-container" orientation="VERTICAL">
             <VBox styleClass="plugins-container-1">
                 <Label text="Standard Plugins" styleClass="header-1"/>
                 <Label styleClass="lbl-info"
                        text="Plugins die standardmäßig installiert sind, aber manuell hinzugefügt werden müssen."/>
-                <GridPane fx:id="containerStandardPlugins" styleClass="gridpane-plugins"/>
+                <ScrollPane hbarPolicy="NEVER" fx:id="scrollPaneStandardPlugins" styleClass="transparent">
+                    <FlowPane fx:id="containerStandardPlugins" styleClass="gridpane-plugins"/>
+                </ScrollPane>
             </VBox>
             <VBox styleClass="plugins-container-1">
                 <Label text="Nutzer Plugins" styleClass="header-1"/>
@@ -31,7 +35,9 @@
                        text="Plugins die von die von der Community entwickelt wurden. Die Entwickler dieser App haben keinen Enfluss auf das Aussehen und Verhalten dieser Plugins."/>
 
                 <StackPane>
-                    <GridPane fx:id="containerUserPlugins" styleClass="gridpane-plugins"/>
+                    <ScrollPane fx:id="scrollPaneUserPlugins" styleClass="transparent" hbarPolicy="NEVER">
+                        <FlowPane fx:id="containerUserPlugins" styleClass="gridpane-plugins"/>
+                    </ScrollPane>
                     <ProgressIndicator fx:id="progressIndicator"/>
                     <VBox fx:id="containerError" styleClass="container-error" alignment="CENTER"/>
                 </StackPane>
