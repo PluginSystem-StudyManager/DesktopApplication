@@ -25,7 +25,7 @@ public class TabInfoUser extends TabInfo {
     }
 
     public void installTab() {
-        Tabs.TabWrapper tab = Tabs.installTab(this.tab);
+        Tabs.TabWrapper tab = Tabs.installTab(this.tab); // TODO: handle not found (NullPointerException)
         InstalledTabs.get().addTab(tab);
 
         parentReload.reloadList();
