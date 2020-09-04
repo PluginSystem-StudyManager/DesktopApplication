@@ -42,7 +42,10 @@ public class AddTabPage extends StackPane implements Initializable {
     SingleChildLayout containerTabInfo;
     @FXML
     ProgressIndicator progressIndicator;
-    @FXML VBox containerError;
+    @FXML
+    VBox containerError;
+    @FXML
+    ButtonIcon btnReload;
 
     public AddTabPage() {
     }
@@ -76,9 +79,12 @@ public class AddTabPage extends StackPane implements Initializable {
         scrollPaneUserPlugins.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
             containerUserPlugins.prefWrapLengthProperty().setValue(newValue.getWidth());
         });
+
+        // Events
+        btnReload.setOnMouseClicked(e -> loadAvailableTabs());
     }
 
-    private void loadAvailableTabs() {
+    public void loadAvailableTabs() {
 
         Task<List<TabData>> task = new Task<>() {
             @Override

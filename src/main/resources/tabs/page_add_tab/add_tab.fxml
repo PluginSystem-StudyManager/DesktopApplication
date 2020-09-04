@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
+<?import GuiElements.ButtonIcon?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import tabs.SingleChildLayout?>
@@ -21,17 +22,22 @@
                 </ScrollPane>
             </VBox>
             <VBox styleClass="plugins-container-1">
-                <Label text="Nutzer Plugins" styleClass="header-1"/>
+                <AnchorPane>
+                    <Label text="Nutzer Plugins" styleClass="header-1" AnchorPane.leftAnchor="0"/>
+                    <ButtonIcon icon="/Icons/reload-48.png" size="24" fx:id="btnReload" id="btnReload"
+                                AnchorPane.rightAnchor="0"/>
+                </AnchorPane>
                 <Label maxWidth="500" wrapText="true" styleClass="lbl-info"
                        text="Plugins die von die von der Community entwickelt wurden. Die Entwickler dieser App haben keinen Enfluss auf das Aussehen und Verhalten dieser Plugins."/>
-
                 <StackPane>
                     <ScrollPane fx:id="scrollPaneUserPlugins" styleClass="transparent" hbarPolicy="NEVER">
                         <FlowPane fx:id="containerUserPlugins" styleClass="gridpane-plugins"/>
                     </ScrollPane>
                     <ProgressIndicator fx:id="progressIndicator"/>
                     <VBox fx:id="containerError" styleClass="container-error" alignment="CENTER"/>
+
                 </StackPane>
+
             </VBox>
         </SplitPane>
         <SingleChildLayout fx:id="containerTabInfo" styleClass="container-full-info"/>
