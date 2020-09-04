@@ -111,16 +111,27 @@ public class AddTabPage extends StackPane implements Initializable {
                 Hyperlink link = new Hyperlink("Create new plugin");
                 link.setOnAction(e -> {
                     // TODO: Correct link
-                    Main.application.getHostServices().showDocument("http://127.0.0.1:8080");
+                    Main.application.getHostServices().showDocument("http://127.0.0.1:8080/devguide");
                 });
                 showError(true, lblNoTabs, link);
             } else {
+                int shownTabs = 0;
                 // Show all tabs
                 clearPane(containerUserPlugins);
-                for(TabData tab : availableTabs) {
-                    if(!InstalledTabs.get().isInstalled(tab.name)) {
+                for (TabData tab : availableTabs) {
+                    if (!InstalledTabs.get().isInstalled(tab.name)) {
                         containerUserPlugins.getChildren().add(new TabInfoUser(tab, containerTabInfo, this::loadAvailableTabs));
+                        shownTabs++;
                     }
+                }
+                if (shownTabs == 0) { // All available tabs are already installed
+                    Label lblNoTabs = new Label("You have already installed all available plugins.");
+                    Hyperlink link = new Hyperlink("But you can create a new one.");
+                    link.setOnAction(e -> {
+                        // TODO: Correct link
+                        Main.application.getHostServices().showDocument("http://127.0.0.1:8080/devguide");
+                    });
+                    showError(true, lblNoTabs, link);
                 }
             }
         });
