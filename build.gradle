@@ -28,7 +28,7 @@ run {
 
 task unzip(type: Copy, dependsOn: distZip) {
 
-    def zipPath = "${buildDir}/distributions/StudyTool.zip"
+    def zipPath = "${buildDir}/distributions/DesktopApplication.zip"
     def zipFile = file(zipPath)
     def outputDir = file("${buildDir}/distributions")
 
@@ -39,6 +39,6 @@ task unzip(type: Copy, dependsOn: distZip) {
 
 task makeInstaller(type:Exec, dependsOn: unzip) {
     /*Java 14+ needed*/
-    workingDir "build/distributions/StudyTool"
-    commandLine "cmd", "/c", "jpackage -i lib -n StudyTool --main-class Start --main-jar StudyTool.jar --win-dir-chooser --win-shortcut"
+    workingDir "build/distributions/DesktopApplication"
+    commandLine "cmd", "/c", "jpackage -i lib -n StudyTool --main-class Start --main-jar DesktopApplication.jar --win-dir-chooser --win-shortcut"
 }
