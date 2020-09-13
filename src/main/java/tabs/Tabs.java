@@ -147,13 +147,16 @@ public class Tabs {
                     .thenApply(HttpResponse::body)
                     .thenAccept(s -> {
                         Gson gson = new GsonBuilder().create();
+                        System.out.println(s);
                         ListPluginsResult res = gson.fromJson(s, ListPluginsResult.class);
-                        for (PluginData plugin : res.getData()) {
-                            // TODO: Adjust classes. (No empty/dummy values)
-                            // Either fully remove the `TabData` class and use only `PluginData` from json schema or
-                            // Adjust class attributes
-                            availableTabs.add(new TabData(plugin.getName(), new String[]{},
-                                    plugin.getShortDescription(), ""));
+                        if (res.getData() != null) {
+                            for (PluginData plugin : res.getData()) {
+                                // TODO: Adjust classes. (No empty/dummy values)
+                                // Either fully remove the `TabData` class and use only `PluginData` from json schema or
+                                // Adjust class attributes
+                                availableTabs.add(new TabData(plugin.getName(), new String[]{},
+                                        plugin.getShortDescription(), ""));
+                            }
                         }
                     })
                     .join();
