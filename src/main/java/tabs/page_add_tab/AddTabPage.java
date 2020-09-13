@@ -2,18 +2,24 @@ package tabs.page_add_tab;
 
 
 import GuiElements.ButtonIcon;
-import GuiElements.CustomWidget;
 import entryPoint.Main;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import tabs.*;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import tabs.InstalledTabs;
+import tabs.SingleChildLayout;
+import tabs.TabData;
+import tabs.Tabs;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,44 +33,58 @@ public class AddTabPage extends StackPane implements Initializable {
     @FXML
     private Pane root;
 
-    @FXML GridPane containerStandardPlugins;
-    @FXML GridPane containerUserPlugins;
-    @FXML Pane containerTabInfo;
-    @FXML ProgressIndicator progressIndicator;
-    @FXML VBox containerError;
-
-    private SingleChildLayout tabInfoPane;
+    @FXML FlowPane containerStandardPlugins;
+    @FXML FlowPane containerUserPlugins;
+    @FXML ScrollPane scrollPaneStandardPlugins;
+    @FXML
+    ScrollPane scrollPaneUserPlugins;
+    @FXML
+    SingleChildLayout containerTabInfo;
+    @FXML
+    ProgressIndicator progressIndicator;
+    @FXML
+    VBox containerError;
+    @FXML
+    ButtonIcon btnReload;
 
     public AddTabPage() {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabInfoPane = new SingleChildLayout();
-        containerTabInfo.getChildren().add(tabInfoPane);
         loadAvailableTabs();
 
         // Standard tabs
         TabData tabDataWebsite = new TabData("Webseite", new String[]{},
                 "Ein Fenster in das Webseiten geladen werden",
                 "Ein Fenster in das Webseiten geladen werden. Diese können beliebig angeordnet werden.");
-        TabInfo tabInfoWebsite = new TabInfoBuiltin(tabDataWebsite, tabInfoPane,
+        TabInfo tabInfoWebsite = new TabInfoBuiltin(tabDataWebsite, containerTabInfo,
                 "/WebView/Gui/WebView.fxml", "/WebView/Gui/settings.fxml",
                 "/Icons/icons8-web-64.png", "/images/website-plugin-preview.png");
-        containerStandardPlugins.add(tabInfoWebsite, 0, 0);
+        containerStandardPlugins.getChildren().add(tabInfoWebsite);
 
-        TabData tabDataCalendar= new TabData("Vorlesungsplan", new String[]{},
+        TabData tabDataCalendar = new TabData("Vorlesungsplan", new String[]{},
                 "Dein komplett individualisierbarer Vorlesungsplan.",
                 "Dein komplett individualisierbarer Vorlesungsplan. Schnelles " +
                         "erstellen, bearbeiten und anzeigen des Vorlesungsplans mit allen nötigen Informationen.");
-        TabInfo tabInfoCalendar = new TabInfoBuiltin(tabDataCalendar, tabInfoPane,
+        TabInfo tabInfoCalendar = new TabInfoBuiltin(tabDataCalendar, containerTabInfo,
                 "/Calendar/Gui/Calender.fxml", "/Calendar/Gui/Settings/CalendarSettings.fxml",
                 "/Icons/icons8-zeitplan-64.png", "/images/calendar-plugin-preview.png");
-        containerStandardPlugins.add(tabInfoCalendar, 1, 0);
+        containerStandardPlugins.getChildren().add(tabInfoCalendar);
 
+        // Sizing
+        scrollPaneStandardPlugins.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
+            containerStandardPlugins.prefWrapLengthProperty().setValue(newValue.getWidth());
+        });
+        scrollPaneUserPlugins.viewportBoundsProperty().addListener((observable, oldValue, newValue) -> {
+            containerUserPlugins.prefWrapLengthProperty().setValue(newValue.getWidth());
+        });
+
+        // Events
+        btnReload.setOnMouseClicked(e -> loadAvailableTabs());
     }
 
-    private void loadAvailableTabs() {
+    public void loadAvailableTabs() {
 
         Task<List<TabData>> task = new Task<>() {
             @Override
@@ -91,19 +111,27 @@ public class AddTabPage extends StackPane implements Initializable {
                 Hyperlink link = new Hyperlink("Create new plugin");
                 link.setOnAction(e -> {
                     // TODO: Correct link
-                    Main.application.getHostServices().showDocument("http://127.0.0.1:8080");
+                    Main.application.getHostServices().showDocument("http://127.0.0.1:8080/devguide");
                 });
                 showError(true, lblNoTabs, link);
             } else {
+                int shownTabs = 0;
                 // Show all tabs
                 clearPane(containerUserPlugins);
-                int row = 0;
-                int col = 0;
-                for(TabData tab : availableTabs) {
-                    if(!InstalledTabs.get().isInstalled(tab.name)) {
-                        containerUserPlugins.add(new TabInfoUser(tab, tabInfoPane, this::loadAvailableTabs), col, row);
-                        col++;
+                for (TabData tab : availableTabs) {
+                    if (!InstalledTabs.get().isInstalled(tab.name)) {
+                        containerUserPlugins.getChildren().add(new TabInfoUser(tab, containerTabInfo, this::loadAvailableTabs));
+                        shownTabs++;
                     }
+                }
+                if (shownTabs == 0) { // All available tabs are already installed
+                    Label lblNoTabs = new Label("You have already installed all available plugins.");
+                    Hyperlink link = new Hyperlink("But you can create a new one.");
+                    link.setOnAction(e -> {
+                        // TODO: Correct link
+                        Main.application.getHostServices().showDocument("http://127.0.0.1:8080/devguide");
+                    });
+                    showError(true, lblNoTabs, link);
                 }
             }
         });

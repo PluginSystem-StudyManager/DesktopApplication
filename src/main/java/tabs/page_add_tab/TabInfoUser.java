@@ -16,7 +16,7 @@ public class TabInfoUser extends TabInfo {
     public void openDescription() {
         WebView browser = new WebView();
         WebEngine engine = browser.getEngine();
-        engine.load("http://127.0.0.1:8080/plugins/info/" + tab.name + "/html");
+        engine.load("http://127.0.0.1:8080/api/plugins/info/" + tab.name + "/html");
         paneTabInfo.set(browser);
         browser.setStyle("-fx-border-color: red; -fx-border-width: 2px");
 
@@ -25,7 +25,7 @@ public class TabInfoUser extends TabInfo {
     }
 
     public void installTab() {
-        Tabs.TabWrapper tab = Tabs.installTab(this.tab);
+        Tabs.TabWrapper tab = Tabs.installTab(this.tab); // TODO: handle not found (NullPointerException)
         InstalledTabs.get().addTab(tab);
 
         parentReload.reloadList();

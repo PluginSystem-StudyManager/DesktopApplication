@@ -1,13 +1,11 @@
 package tabs;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.SerializedName;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
-
+import tabs.apiClasses.ListPluginsResult;
+import tabs.apiClasses.PluginData;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +18,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.CompletionException;
 
 // TODO: handle no connection to server, 404, wrong formatted data
@@ -64,7 +64,7 @@ public class Tabs {
         // TODO: handle jar not found
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://127.0.0.1:8080/plugins/download/" + tabData.name))
+                .uri(URI.create("http://127.0.0.1:8080/api/plugins/download/" + tabData.name))
                 .build();
         Path jarPath = new File(tabsFolder.toURI().getPath() + tabData.name + ".jar").toPath();
         client.sendAsync(request, HttpResponse.BodyHandlers.ofFile(jarPath))
@@ -78,7 +78,7 @@ public class Tabs {
     private List<TabWrapper> _loadInstalledTabs() {
         List<TabWrapper> tabsList = new ArrayList<>();
         List<String> installedTabs = Config.data().getTabs();
-        for(String tabName : installedTabs) {
+        for (String tabName : installedTabs) {
             // Filename must be {tabName}.jar
             File jarFile = new File(tabsFolder, tabName + ".jar");
             TabWrapper tab = loadJar(jarFile, TabsDataStore.data().get(tabName));
@@ -139,19 +139,28 @@ public class Tabs {
         List<TabData> availableTabs = new ArrayList<>();
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://127.0.0.1:8080/plugins/list/"))
+                .uri(URI.create("http://127.0.0.1:8080/api/plugins/list"))
                 .header("Content-Type", "application/json")
                 .build();
         try {
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenApply(HttpResponse::body)
                     .thenAccept(s -> {
-                        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
-                        AllPluginsData allPluginsData = gson.fromJson(s, AllPluginsData.class);
-                        availableTabs.addAll(allPluginsData.plugins.values());
+                        Gson gson = new GsonBuilder().create();
+                        System.out.println(s);
+                        ListPluginsResult res = gson.fromJson(s, ListPluginsResult.class);
+                        if (res.getData() != null) {
+                            for (PluginData plugin : res.getData()) {
+                                // TODO: Adjust classes. (No empty/dummy values)
+                                // Either fully remove the `TabData` class and use only `PluginData` from json schema or
+                                // Adjust class attributes
+                                availableTabs.add(new TabData(plugin.getName(), new String[]{},
+                                        plugin.getShortDescription(), ""));
+                            }
+                        }
                     })
                     .join();
-        }catch (CompletionException e) {
+        } catch (CompletionException e) {
             throw new ConnectException(e.getMessage());
         }
         return availableTabs;
@@ -184,12 +193,4 @@ public class Tabs {
         public LoadInfoData() {
         }
     }
-
-    static class AllPluginsData {
-        HashMap<String, TabData> plugins;
-
-        public AllPluginsData() {
-        }
-    }
-
 }
